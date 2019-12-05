@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
-    <title>Whats Cookin</title>
+    <meta charset="utf-8">
+    <title>Fresh Picks</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/apple-logo.png" />
   </head>
   <body>
-    <h1>Whats Cookin</h1>
-
+    <header>
+      <h1>Fresh Picks</h1>
+      <div id="search">
+        <input class="search-input idea-input" type="text" placeholder="Search by Recipe or Ingredient"></input>
+        <button class="search-btn" type="button" name="button"><img src="../images/search.svg" alt="search button"></button>
+      </div>
+      <button class="search-btn" type="button" name="button">My Recipes</button>
+      <button class="search-btn" type="button" name="button">My Pantry</button>
+    </header>
+    <section class="featured-image">
+      <img>
+    </section>
+    <aside>
+      <h2>Recipe Type</h2>
+      <ul>
+        <li><input type="checkbox"> Appetizer</li>
+        <li><input type="checkbox"> Beverage</li>
+        <li><input type="checkbox"> Breakfast</li>
+        <li><input type="checkbox"> Dessert</li>
+        <li><input type="checkbox"> Dinner</li>
+        <li><input type="checkbox"> Lunch</li>
+        <li><input type="checkbox"> Side Dish</li>
+      </ul>
+      <button class="filter-btn">Filter Recipes</button>
+    </aside>
+    <main>
+      <div class="recipe-card">
+        <h3>Chicken Baked Parmesan</h3>
+        <div class="card-photo-preview parmesan">
+        </div>
+        <h4>Dinner</h4>
+        <img src="../images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
+      </div>
+      <div class="recipe-card">
+        <h3>Pancakes</h3>
+        <div class="card-photo-preview pancakes">
+        </div>
+        <h4>Breakfast</h4>
+        <img src="../images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
+      </div>
+    </main>
     <script type="text/javascript" src="../data/users-data.js"></script>
     <script type="text/javascript" src="../data/recipe-data.js"></script>
     <script type="text/javascript" src="../data/ingredient-data.js"></script>
