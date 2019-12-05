@@ -1,0 +1,38 @@
+* {
+  border: 1px solid #C4EB67;
+}
+
+body {
+  background-color: #5B7894;
+  display: grid;
+  font-family: 'Quicksand', sans-serif;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "header header"
+    "image image"
+    "aside main";
+  }
+
+h1 {
+  color: #C4EB67;
+}
+
+h2 {
+  color: #84C8A4;
+}
+
+header {
+  grid-area: header;
+}
+
+.featured-image {
+  grid-area: image;
+}
+
+aside {
+  grid-area: aside;
+}
+
+main {
+  grid-area: main;
+}
