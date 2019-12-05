@@ -2,12 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>What's Cookin'</title>
+    <title>Fresh Picks</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
-      <h1>What's Cookin'?</h1>
+      <h1>Fresh Picks</h1>
       <div>
         <button></button>
         <input type="text" placeholder="Type in a recipe name or ingredient"></input>
@@ -15,23 +16,36 @@
       <button>My Recipes</button>
       <button>My Pantry</button>
     </header>
-    <section>
+    <section class="featured-image">
       <img>
     </section>
     <aside>
       <h2>Recipe Type</h2>
-        <ul>
-          <li>Breakfast</li>
-          <li>Lunch</li>
-          <li>Dinner</li>
-        </ul>
+      <ul>
+        <li><input type="checkbox"> Appetizer</li>
+        <li><input type="checkbox"> Beverage</li>
+        <li><input type="checkbox"> Breakfast</li>
+        <li><input type="checkbox"> Dessert</li>
+        <li><input type="checkbox"> Dinner</li>
+        <li><input type="checkbox"> Lunch</li>
+        <li><input type="checkbox"> Side Dish</li>
+      </ul>
+      <button class="filter-btn">Filter Recipes</button>
     </aside>
     <main>
-      <div>
+      <div class="recipe-card">
         <h3>Chicken Baked Parmesan</h3>
-        <img>
+        <div class="card-photo-preview parmesan">
+        </div>
         <h4>Dinner</h4>
-        <img>
+        <img src="images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
+      </div>
+      <div class="recipe-card">
+        <h3>Pancakes</h3>
+        <div class="card-photo-preview pancakes">
+        </div>
+        <h4>Breakfast</h4>
+        <img src="images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
       </div>
     </main>
   </body>
