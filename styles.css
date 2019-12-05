@@ -11,10 +11,8 @@ body {
     "header header"
     "image image"
     "aside main";
-  }
-
-h1 {
-  color: #C4EB67;
+  margin: none;
+  padding: none;
 }
 
 h2 {
@@ -36,10 +34,71 @@ h4 {
   border-radius: 3%;
 }
 
+/* HEADER */
 header {
+  border-bottom: 1px solid white;
+  display: flex;
+  flex-direction: row;
   grid-area: header;
+  margin: none;
+  padding: 1% 0%;
+  width: 100%;
 }
 
+h1 {
+  color: #C4EB67;
+  font-size: 50px;
+  margin: 0%;
+  width: 70%;
+}
+
+#search {
+  display: flex;
+  flex-direction: row;
+  margin: none;
+  padding: none;
+  width: 100%;
+}
+
+.search-btn {
+  align-items: center;
+  background: #5B7894 no-repeat;
+  border: none;
+  border-radius: 4px;
+  border-right: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: none;
+  /* margin-right: -0.5%; */
+  outline: none;
+  text-align: center;
+  width: 15%;
+}
+
+.search-btn img {
+  width: 45%;
+}
+
+.search-input {
+  border: none;
+  border-bottom: 1px solid #C4EB67;
+  color: white;
+  font-size: 50px;
+  height: 100%;
+  margin: 0;
+  outline: none;
+  padding: 0%;
+  width: 100%;
+  background: #5B7894 no-repeat;
+}
+
+.search-input::placeholder {
+  color: #A9AAD2;
+  font-size: 30px;
+}
+
+/* IMAGE SECTION */
 .featured-image {
   grid-area: image;
 }
