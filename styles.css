@@ -1,5 +1,5 @@
 * {
-  /* border: 1px solid #C4EB67; */
+
 }
 
 body {
@@ -19,6 +19,7 @@ h1 {
 
 h2 {
   color: #84C8A4;
+  margin: 10px 0px 10px 0px;
 }
 
 h3 {
@@ -45,6 +46,9 @@ header {
 
 aside {
   grid-area: aside;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
 }
 
 main {
@@ -88,5 +92,26 @@ main {
 }
 
 ul {
-  list-style-type:none;
+  list-style-type: none;
+  text-align: left;
+}
+
+li {
+  margin: 5px;
+}
+
+.filter-btn {
+  background-color: #359567;
+  border: 0;
+  border-radius: 3%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+  padding: 5px 10px 5px 10px;
+}
+
+.filter-btn:hover {
+  background-color: #84C8A4;
 }
