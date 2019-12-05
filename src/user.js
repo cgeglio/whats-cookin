@@ -1,8 +1,13 @@
+const data = require('../data/users-data');
+const userData = data.users;
+
 class User {
-  constructor() {
+  constructor(user) {
+    this.id = user.id;
+    this.name = user.name;
+    this.pantry = user.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-    // this.filteredRecipes;
   }
   saveRecipe(recipe) {
     this.favoriteRecipes.push(recipe);
