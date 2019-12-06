@@ -67,7 +67,6 @@ h1 {
   display: flex;
   justify-content: center;
   margin: none;
-  /* margin-right: -0.5%; */
   outline: none;
   text-align: center;
   width: 15%;
@@ -103,12 +102,10 @@ h1 {
 aside {
   grid-area: aside;
   background-color: white;
-  /* padding: 10px; */
   position: relative;
   text-align: center;
   display: flex;
   justify-content: center;
-  /* height: 100vh; */
 }
 
 main {
