@@ -1,6 +1,3 @@
-const data = require('../data/users-data');
-const userData = data.users;
-
 class User {
   constructor(user) {
     this.id = user.id;
