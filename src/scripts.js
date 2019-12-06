@@ -11,7 +11,7 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       recipeInfo.name = recipeInfo.name.substring(0, 40) + '...';
     }
-  main.innerHTML += `
+  let cardHtml = `
     <div class="recipe-card">
       <h3 maxlength="40">${recipeInfo.name}</h3>
       <div class="card-photo-preview">
@@ -20,5 +20,6 @@ function createCards() {
       <h4>${recipeInfo.tags[0]}</h4>
       <img src="../images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
     </div>`
+    main.insertAdjacentHTML("beforeend", cardHtml);
   });
 };
