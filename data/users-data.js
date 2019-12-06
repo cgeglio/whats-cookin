@@ -53255,6 +53255,4 @@ let users = [
   }
 ]
 
-module.exports = {
-  users
-}
+module.exports = { users };
