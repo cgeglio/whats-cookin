@@ -5,7 +5,7 @@ const User = require('../src/user');
 const Recipe = require('../src/recipe');
 const data = require('../data/users-data');
 
-describe('Game', function() {
+describe('User', function() {
   let user;
   let userInfo;
   let recipe;
