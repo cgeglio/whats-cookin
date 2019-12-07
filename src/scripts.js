@@ -2,9 +2,9 @@ let main = document.querySelector('main');
 let recipes = [];
 
 window.addEventListener("load", createCards);
+window.addEventListener("load", generateUser);
 
 function createCards() {
-
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
     recipes.push(recipeInfo);
@@ -23,3 +23,13 @@ function createCards() {
     main.insertAdjacentHTML("beforeend", cardHtml);
   });
 };
+
+function generateUser() {
+  let user = users[Math.floor(Math.random()*users.length)];
+  let firstName = user.name.split(' ')[0];
+  let welcomeMsg = `
+    <div class="welcome-msg">
+      <h1>Welcome ${firstName}!</h1>
+    </div>`;
+  main.insertAdjacentHTML("afterbegin", welcomeMsg);
+}
