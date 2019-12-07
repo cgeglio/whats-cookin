@@ -142,14 +142,6 @@ main {
   background-position: 50% 50%;
 }
 
-.parmesan {
-  background-image: url("images/chicken-parm.jpg");
-}
-
-.pancakes {
-  background-image: url("images/pancakes.jpg");
-}
-
 ul {
   list-style-type: none;
   text-align: left;
