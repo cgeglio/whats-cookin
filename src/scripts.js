@@ -25,7 +25,7 @@ function createCards() {
 };
 
 function generateUser() {
-  let user = users[Math.floor(Math.random()*users.length)];
+  let user = new User(users[Math.floor(Math.random()*users.length)]);
   let firstName = user.name.split(' ')[0];
   let welcomeMsg = `
     <div class="welcome-msg">
