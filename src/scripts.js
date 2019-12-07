@@ -1,9 +1,12 @@
 let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
+let filterBtn = document.querySelector(".filter-btn");
+let tagCheckboxes = document.querySelectorAll('.checked-tag');
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
+filterBtn.addEventListener("click", filterRecipes);
 
 function createCards() {
 
@@ -42,7 +45,29 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox"> ${tag}</li>`;
+    let tagHtml = `<li><input type="checkbox" class="checked-tag"> ${tag}</li>`;
     tagList.insertAdjacentHTML("beforeend", tagHtml);
   });
 };
+
+
+
+function filterRecipes() {
+  let checkboxInfo = [];
+  checkboxInfo.push(tagCheckboxes);
+  let selectedRecipes = checkboxInfo.forEach(box => {
+    if(box.checked) {
+      return recipes.filter(recipe => {
+        return recipe.tags.includes(box.parentNode.innerText.trim());
+      });
+    }
+  });
+  hideUnselectedRecipes(selectedRecipes)
+};
+
+function hideUnselectedRecipes(selected) {
+  
+
+}
+
+]
