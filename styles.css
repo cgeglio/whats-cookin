@@ -9,6 +9,7 @@ body {
     "aside main";
   margin: none;
   padding: none;
+  height: 100vh;
 }
 
 h2 {
@@ -106,6 +107,7 @@ aside {
   text-align: center;
   display: flex;
   justify-content: center;
+  height: 100%gi;
 }
 
 main {
@@ -172,4 +174,5 @@ li {
   margin-top: 15px;
   width: auto;
   position: fixed;
+  height: 100%
 }
