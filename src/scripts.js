@@ -2,11 +2,11 @@ let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
 let filterBtn = document.querySelector(".filter-btn");
-let tagCheckboxes = document.querySelectorAll('.checked-tag');
+
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
-filterBtn.addEventListener("click", filterRecipes);
+filterBtn.addEventListener("click", findCheckedBoxes);
 
 function createCards() {
 
@@ -17,7 +17,7 @@ function createCards() {
       recipeInfo.name = recipeInfo.name.substring(0, 40) + '...';
     }
   let cardHtml = `
-    <div class="recipe-card">
+    <div class="recipe-card" id=${recipeInfo.id}>
       <h3 maxlength="40">${recipeInfo.name}</h3>
       <div class="card-photo-preview">
         <img src=${recipeInfo.image} class="card-photo-preview">
@@ -51,23 +51,31 @@ function listTags(allTags) {
 };
 
 
-
-function filterRecipes() {
-  let checkboxInfo = [];
-  checkboxInfo.push(tagCheckboxes);
-  let selectedRecipes = checkboxInfo.forEach(box => {
-    if(box.checked) {
-      return recipes.filter(recipe => {
-        return recipe.tags.includes(box.parentNode.innerText.trim());
-      });
-    }
-  });
-  hideUnselectedRecipes(selectedRecipes)
+function findCheckedBoxes() {
+  let tagCheckboxes = document.querySelectorAll('.checked-tag');
+  let checkboxInfo = Array.from(tagCheckboxes)
+  let selectedTags = checkboxInfo.filter(box => {
+    return box.checked;
+  })
+  findTaggedRecipes(selectedTags);
 };
 
-function hideUnselectedRecipes(selected) {
-  
 
-}
+function findTaggedRecipes(selected) {
+  selected.forEach(tag => {
+    let filteredResults = recipes.filter(recipe => {
+      return recipe.tags.includes(tag.parentNode.innerText.trim());
+    });
+    hideUnselectedRecipes(filteredResults);
+  });
+};
 
-]
+function hideUnselectedRecipes(filtered) {
+    let foundRecipes = recipes.filter(recipe => {
+      return !filtered.includes(recipe);
+    });
+    foundRecipes.forEach(recipe => {
+      let domRecipe = document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "none";
+    });
+};
