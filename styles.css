@@ -194,3 +194,15 @@ span {
   font-weight: 400;
   color: #C4EB67;
 }
+
+.welcome-msg {
+  width: 95%;
+  background-color: #84C8A4;
+  height: 70px;
+  text-align: center;
+}
+
+.welcome-msg h1 {
+  width: 100%;
+  margin-top: 10px;
+}
