@@ -2,7 +2,7 @@ let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
 let filterBtn = document.querySelector(".filter-btn");
-let favoriteBtn = document.querySelector(".card-apple-icon");
+let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let user;
 
 window.addEventListener("load", createCards);
@@ -10,6 +10,7 @@ window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
+savedRecipesBtn.addEventListener("click", showSavedRecipes);
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -91,14 +92,23 @@ function generateUser() {
 
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon") {
-    let card = event.target.closest(".recipe-card");
-    if (!user.favoriteRecipes.includes(card.id)) {
+    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
-      user.saveRecipe(card.id);
+      user.saveRecipe(cardId);
     } else {
       event.target.src = "../images/apple-logo-outline.png";
-      user.removeRecipe(card.id);
-    }
-  }
-  console.log(user.favoriteRecipes)
+      user.removeRecipe(cardId);
+    };
+  };
+}
+
+function showSavedRecipes() {
+  let unsavedRecipes = recipes.filter(recipe => {
+    return !user.favoriteRecipes.includes(recipe.id);
+  });
+  unsavedRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
 }
