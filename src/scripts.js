@@ -80,8 +80,6 @@ function hideUnselectedRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
-  console.log(filtered)
-  console.log(foundRecipes)
   foundRecipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
@@ -119,4 +117,11 @@ function showSavedRecipes() {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
   });
+  showMyRecipesBanner();
+}
+
+function showMyRecipesBanner() {
+  document.querySelector(".welcome-msg").style.display = "none";
+  document.querySelector(".my-recipes-banner").style.display = "flex";
+
 }

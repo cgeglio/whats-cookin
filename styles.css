@@ -163,6 +163,7 @@ li {
   margin: 5px;
 }
 
+.show-all-btn,
 .filter-btn {
   background-color: #359567;
   border: 0;
@@ -171,9 +172,16 @@ li {
   font-size: 12pt;
   font-weight: bold;
   color: white;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
+}
+
+.show-all-btn {
+  width: 200px;
+  height: 40px;
+  margin-right: 5%;
+  margin-top:
 }
 
 .filter-btn:hover {
@@ -192,6 +200,7 @@ span {
   color: #C4EB67;
 }
 
+.my-recipes-banner,
 .welcome-msg {
   width: 95%;
   background-color: #84C8A4;
@@ -199,7 +208,13 @@ span {
   text-align: center;
 }
 
+.my-recipes-banner h1,
 .welcome-msg h1 {
   width: 100%;
   margin-top: 10px;
+}
+
+.my-recipes-banner {
+  display: none;
+  justify-content: space-between;
 }
