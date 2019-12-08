@@ -62,18 +62,26 @@ function findCheckedBoxes() {
 }
 
 function findTaggedRecipes(selected) {
+  let filteredResults = [];
   selected.forEach(tag => {
-    let filteredResults = recipes.filter(recipe => {
+    let allRecipes = recipes.filter(recipe => {
       return recipe.tags.includes(tag.parentNode.innerText.trim());
     });
-    hideUnselectedRecipes(filteredResults);
+    allRecipes.forEach(recipe => {
+      if (!filteredResults.includes(recipe)) {
+        filteredResults.push(recipe);
+      }
+    })
   });
+  hideUnselectedRecipes(filteredResults);
 }
 
 function hideUnselectedRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
+  console.log(filtered)
+  console.log(foundRecipes)
   foundRecipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
