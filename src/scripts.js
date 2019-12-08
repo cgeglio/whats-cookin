@@ -3,6 +3,7 @@ let tagList = document.querySelector('.tag-list');
 let recipes = [];
 let filterBtn = document.querySelector(".filter-btn");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
+let allRecipesBtn = document.querySelector(".show-all-btn");
 let user;
 
 window.addEventListener("load", createCards);
@@ -11,6 +12,7 @@ window.addEventListener("load", generateUser);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
+allRecipesBtn.addEventListener("click", showAllRecipes);
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -123,5 +125,17 @@ function showSavedRecipes() {
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
   document.querySelector(".my-recipes-banner").style.display = "flex";
+}
 
+function showAllRecipes() {
+  recipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "block";
+  });
+  showWelcomeBanner();
+}
+
+function showWelcomeBanner() {
+  document.querySelector(".welcome-msg").style.display = "flex";
+  document.querySelector(".my-recipes-banner").style.display = "none";
 }
