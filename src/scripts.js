@@ -2,12 +2,14 @@ let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
 let filterBtn = document.querySelector(".filter-btn");
+let favoriteBtn = document.querySelector(".card-apple-icon");
+let user;
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
 filterBtn.addEventListener("click", findCheckedBoxes);
-
+main.addEventListener("click", addToMyRecipes);
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -78,11 +80,18 @@ function hideUnselectedRecipes(filtered) {
 };
 
 function generateUser() {
-  let user = new User(users[Math.floor(Math.random()*users.length)]);
+  user = new User(users[Math.floor(Math.random()*users.length)]);
   let firstName = user.name.split(' ')[0];
   let welcomeMsg = `
     <div class="welcome-msg">
       <h1>Welcome ${firstName}!</h1>
     </div>`;
   main.insertAdjacentHTML("afterbegin", welcomeMsg);
+}
+
+function addToMyRecipes() {
+  if (event.target.className === "card-apple-icon") {
+    user.saveRecipe(event.target.closest(".recipe-card").id);
+    console.log(user.favoriteRecipes)
+  }
 }
