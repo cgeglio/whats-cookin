@@ -91,7 +91,14 @@ function generateUser() {
 
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon") {
-    user.saveRecipe(event.target.closest(".recipe-card").id);
-    console.log(user.favoriteRecipes)
+    let card = event.target.closest(".recipe-card");
+    if (!user.favoriteRecipes.includes(card.id)) {
+      event.target.src = "../images/apple-logo.png";
+      user.saveRecipe(card.id);
+    } else {
+      event.target.src = "../images/apple-logo-outline.png";
+      user.removeRecipe(card.id);
+    }
   }
+  console.log(user.favoriteRecipes)
 }
