@@ -73,7 +73,7 @@ function findTaggedRecipes(selected) {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
-    })
+    })   
   });
   hideUnselectedRecipes(filteredResults);
 }
@@ -86,7 +86,7 @@ function hideUnselectedRecipes(filtered) {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
   });
-};
+}
 
 function generateUser() {
   user = new User(users[Math.floor(Math.random()*users.length)]);
