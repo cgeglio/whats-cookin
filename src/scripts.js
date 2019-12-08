@@ -5,7 +5,9 @@ let filterBtn = document.querySelector(".filter-btn");
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
+window.addEventListener("load", generateUser);
 filterBtn.addEventListener("click", findCheckedBoxes);
+
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -73,4 +75,14 @@ function hideUnselectedRecipes(filtered) {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
   });
+};
+
+function generateUser() {
+  let user = new User(users[Math.floor(Math.random()*users.length)]);
+  let firstName = user.name.split(' ')[0];
+  let welcomeMsg = `
+    <div class="welcome-msg">
+      <h1>Welcome ${firstName}!</h1>
+    </div>`;
+  main.insertAdjacentHTML("afterbegin", welcomeMsg);
 }

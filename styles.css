@@ -44,10 +44,12 @@ header {
 }
 
 h1 {
-  color: #C4EB67;
+  color: white;
   font-size: 50px;
   margin: 0%;
   width: 70%;
+  font-family: 'Sulphur Point', sans-serif;
+
 }
 
 #search {
@@ -135,6 +137,12 @@ main {
   float: right;
 }
 
+.header-apple-icon {
+  height: 40px;
+  width: 35px;
+  margin-left: 5px;
+}
+
 .card-photo-preview {
   width: 100%;
   height: 130px;
@@ -175,4 +183,21 @@ li {
   width: auto;
   position: fixed;
   height: 100%
+}
+
+span {
+  font-weight: 400;
+  color: #C4EB67;
+}
+
+.welcome-msg {
+  width: 95%;
+  background-color: #84C8A4;
+  height: 70px;
+  text-align: center;
+}
+
+.welcome-msg h1 {
+  width: 100%;
+  margin-top: 10px;
 }
