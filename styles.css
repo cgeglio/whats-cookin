@@ -50,12 +50,12 @@ h1 {
   margin: 0%;
   width: 70%;
   font-family: 'Sulphur Point', sans-serif;
-
 }
 
 #search {
   display: flex;
   flex-direction: row;
+  font-family: 'Quicksand', sans-serif;
   margin: none;
   padding: none;
   width: 100%;
@@ -80,10 +80,11 @@ h1 {
   width: 45%;
 }
 
-.search-input {
+#search-input {
   border: none;
   border-bottom: 1px solid #C4EB67;
   color: white;
+  font-family: 'Quicksand', sans-serif;
   font-size: 50px;
   height: 100%;
   margin: 0;
@@ -97,8 +98,8 @@ h1 {
   display: none;
 }
 
-.search-input::placeholder {
-  color: #A9AAD2;
+#search-input::placeholder {
+  color: lightblue;
   font-size: 30px;
 }
 
