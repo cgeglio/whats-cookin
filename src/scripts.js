@@ -52,7 +52,9 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag"> ${tag}</li>`;
+    let tagHtml = `<li><input type="checkbox" class="checked-tag">
+                  <label for="checked-tag">${tag}</label></li>`
+                  ;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
