@@ -1,18 +1,21 @@
 let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
-let filterBtn = document.querySelector(".filter-btn");
-let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
-let allRecipesBtn = document.querySelector(".show-all-btn");
+let filterBtn = document.querySelector('.filter-btn');
+let savedRecipesBtn = document.querySelector('.saved-recipes-btn');
+let allRecipesBtn = document.querySelector('.show-all-btn');
 let user;
+let searchInput = document.querySelector('.search-input');
+let searchBtn = document.querySelector('.search-btn');
 
-window.addEventListener("load", createCards);
-window.addEventListener("load", findTags);
-window.addEventListener("load", generateUser);
-filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
-savedRecipesBtn.addEventListener("click", showSavedRecipes);
-allRecipesBtn.addEventListener("click", showAllRecipes);
+window.addEventListener('load', createCards);
+window.addEventListener('load', findTags);
+window.addEventListener('load', generateUser);
+filterBtn.addEventListener('click', findCheckedBoxes);
+main.addEventListener('click', addToMyRecipes);
+savedRecipesBtn.addEventListener('click', showSavedRecipes);
+allRecipesBtn.addEventListener('click', showAllRecipes);
+searchBtn.addEventListener('click', searchRecipes);
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -25,10 +28,10 @@ function createCards() {
       <div class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${recipeInfo.name}</h3>
         <div class="card-photo-preview">
-          <img src=${recipeInfo.image} class="card-photo-preview">
+          <img src=${recipeInfo.image} class="card-photo-preview" alt="recipe preview">
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
-        <img src="../images/apple-logo-outline.png" alt="unfilled-apple-icon" class="card-apple-icon">
+        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
       </div>`
     main.insertAdjacentHTML("beforeend", cardHtml);
   });
@@ -49,8 +52,10 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag"> ${tag}</li>`;
-    tagList.insertAdjacentHTML("beforeend", tagHtml);
+    let tagHtml = `<li><input type="checkbox" class="checked-tag">
+                  <label for="checked-tag">${tag}</label></li>`
+                  ;
+    tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
 
@@ -73,7 +78,7 @@ function findTaggedRecipes(selected) {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
-    })   
+    })
   });
   hideUnselectedRecipes(filteredResults);
 }
@@ -84,7 +89,7 @@ function hideUnselectedRecipes(filtered) {
   });
   foundRecipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
+    domRecipe.style.display = 'none';
   });
 }
 
@@ -138,4 +143,11 @@ function showAllRecipes() {
 function showWelcomeBanner() {
   document.querySelector(".welcome-msg").style.display = "flex";
   document.querySelector(".my-recipes-banner").style.display = "none";
+}
+
+function searchRecipes() {
+  let searchedRecipes = recipeData.filter(recipe => {
+    return recipe.name.includes(searchInput.value);
+  });
+  console.log(searchedRecipes);
 }
