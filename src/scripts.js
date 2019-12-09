@@ -2,12 +2,17 @@ let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
 let filterBtn = document.querySelector(".filter-btn");
+let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
+let allRecipesBtn = document.querySelector(".show-all-btn");
+let user;
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
 filterBtn.addEventListener("click", findCheckedBoxes);
-
+main.addEventListener("click", addToMyRecipes);
+savedRecipesBtn.addEventListener("click", showSavedRecipes);
+allRecipesBtn.addEventListener("click", showAllRecipes);
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -61,12 +66,14 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
-    let results = recipes.filter(recipe => {
+    let allRecipes = recipes.filter(recipe => {
       return recipe.tags.includes(tag.parentNode.innerText.trim());
     });
-    results.forEach(result => {
-      filteredResults.push(result);
-    });
+    allRecipes.forEach(recipe => {
+      if (!filteredResults.includes(recipe)) {
+        filteredResults.push(recipe);
+      }
+    })   
   });
   hideUnselectedRecipes(filteredResults);
 }
@@ -82,11 +89,53 @@ function hideUnselectedRecipes(filtered) {
 }
 
 function generateUser() {
-  let user = new User(users[Math.floor(Math.random()*users.length)]);
+  user = new User(users[Math.floor(Math.random()*users.length)]);
   let firstName = user.name.split(' ')[0];
   let welcomeMsg = `
     <div class="welcome-msg">
       <h1>Welcome ${firstName}!</h1>
     </div>`;
   main.insertAdjacentHTML("afterbegin", welcomeMsg);
+}
+
+function addToMyRecipes() {
+  if (event.target.className === "card-apple-icon") {
+    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    if (!user.favoriteRecipes.includes(cardId)) {
+      event.target.src = "../images/apple-logo.png";
+      user.saveRecipe(cardId);
+    } else {
+      event.target.src = "../images/apple-logo-outline.png";
+      user.removeRecipe(cardId);
+    };
+  };
+}
+
+function showSavedRecipes() {
+  let unsavedRecipes = recipes.filter(recipe => {
+    return !user.favoriteRecipes.includes(recipe.id);
+  });
+  unsavedRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+  showMyRecipesBanner();
+}
+
+function showMyRecipesBanner() {
+  document.querySelector(".welcome-msg").style.display = "none";
+  document.querySelector(".my-recipes-banner").style.display = "flex";
+}
+
+function showAllRecipes() {
+  recipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "block";
+  });
+  showWelcomeBanner();
+}
+
+function showWelcomeBanner() {
+  document.querySelector(".welcome-msg").style.display = "flex";
+  document.querySelector(".my-recipes-banner").style.display = "none";
 }
