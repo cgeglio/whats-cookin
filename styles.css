@@ -115,18 +115,20 @@ h1 {
 
 aside {
   grid-area: aside;
-  text-align: center;
+  background-color: white;
   position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100%gi;
 }
 
 main {
   grid-area: main;
   display: flex;
   justify-content: center;
-  align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: 6000px;
 }
 
 .recipe-card {
@@ -165,7 +167,7 @@ main {
 ul {
   list-style-type: none;
   text-align: left;
-  padding-left: 35px;
+  padding: 0;
 }
 
 li {
@@ -181,6 +183,7 @@ li {
   font-size: 12pt;
   font-weight: bold;
   color: white;
+  margin-top: 15px;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
 }
@@ -189,7 +192,7 @@ li {
   width: 200px;
   height: 40px;
   margin-right: 5%;
-  margin-top: 15px;
+  margin-top:
 }
 
 .filter-btn:hover {
@@ -197,11 +200,10 @@ li {
 }
 
 .wrap {
-  width: 200px;
+  margin-top: 15px;
+  width: auto;
   position: fixed;
-  height: 100vh;
-  background-color: white;
-  padding: 10px;
+  height: 100%
 }
 
 span {
