@@ -163,7 +163,7 @@ function findPantryInfo() {
       return ingredient.id === item.ingredient;
     });
     if(itemInfo && !pantryInfo.includes(itemInfo.name)) {
-      pantryInfo.push(itemInfo.name);
+      pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
   displayPantryInfo(pantryInfo);
@@ -172,8 +172,8 @@ function findPantryInfo() {
 function displayPantryInfo(pantry) {
   pantry.sort();
   pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" id="${ingredient}-checkbox">
-      <label for="${ingredient}-checkbox">${ingredient}</label></li>`;
+    let ingredientHtml = `<li><input type="checkbox" id="${ingredient.name}-checkbox">
+      <label for="${ingredient.name}-checkbox">${ingredient.name}, ${ingredient.count}</label></li>`;
     document.querySelector(".pantry-list").insertAdjacentHTML('beforeend', ingredientHtml);
   });
 };
