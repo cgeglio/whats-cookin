@@ -2,7 +2,7 @@ body {
   background-color: #5B7894;
   display: grid;
   font-family: 'Quicksand', sans-serif;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
     "image image"
@@ -109,15 +109,10 @@ h1 {
   overflow: hidden;
 }
 
-/* .apple-banner {
-  width: 100%;
-  background-size: contain;
-} */
-
 aside {
   grid-area: aside;
   background-color: white;
-  position: relative;
+  position: fixed;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -203,10 +198,10 @@ li {
 .wrap {
   margin-top: 5px;
   width: auto;
-  position: fixed;
-  height: 450px;
-  overflow: scroll;
-  /* margin-bottom: 30px; */
+  position: relative;
+  /* height: 450px; */
+  /* overflow: scroll; */
+  padding: 20px;
 }
 
 span {
@@ -236,18 +231,25 @@ span {
 
 .drop-menu {
   align-items: center;
-  background-color: white;
-  display: block;
-  margin-top: 89px;
+  background-color: #DAE4EE;
+  display: none;
+  margin-top: 92px;
   overflow: scroll;
   height: 600px;
-  width: 300px;
+  width: 250px;
   text-align: center;
   position: absolute;
-  padding-left: 15px;
-  margin-left: 77%;
+  padding: 12px;
+  margin-left: 81%;
   z-index: 3;
 }
+
+.drop-menu h2 {
+  color: #359567;
+  margin: 0px;
+}
+
+
 
 .pantry-list {
   padding-left: 15px;

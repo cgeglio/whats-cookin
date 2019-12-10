@@ -182,7 +182,7 @@ function toggleMenu() {
   var menuDropdown = document.querySelector(".drop-menu");
   menuOpen = !menuOpen;
   if (menuOpen) {
-    menuDropdown.style.display= "flex";
+    menuDropdown.style.display= "block";
   } else {
     menuDropdown.style.display= "none";
   }
