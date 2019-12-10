@@ -25,15 +25,19 @@ pantryBtn.addEventListener("click", toggleMenu);
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
+    let shortRecipeName = recipeInfo.name;
     recipes.push(recipeInfo);
     if (recipeInfo.name.length > 40) {
-      recipeInfo.name = recipeInfo.name.substring(0, 40) + '...';
+      shortRecipeName = recipeInfo.name.substring(0, 40) + '...';
     }
     let cardHtml = `
       <div class="recipe-card" id=${recipeInfo.id}>
-        <h3 maxlength="40">${recipeInfo.name}</h3>
-        <div class="card-photo-preview">
-          <img src=${recipeInfo.image} class="card-photo-preview" alt="recipe preview">
+        <h3 maxlength="40">${shortRecipeName}</h3>
+        <div class="card-photo-container">
+          <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
+          <div class="text">
+            <div>Click Card for<br>Ingredients & Instructions</div>
+          </div>
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
         <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
@@ -59,9 +63,15 @@ function findTags() {
 function listTags(allTags) {
   allTags.forEach(tag => {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}-checkbox">
-                  <label for="${tag}-checkbox">${tag}</label></li>`;
+                  <label for="${tag}-checkbox">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
+}
+
+function capitalize(words) {
+  return words.split(' ').map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
 }
 
 function findCheckedBoxes() {
