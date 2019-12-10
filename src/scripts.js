@@ -7,6 +7,9 @@ let allRecipesBtn = document.querySelector('.show-all-btn');
 let user;
 let searchInput = document.querySelector('.search-input');
 let searchBtn = document.querySelector('.search-btn');
+let pantryBtn = document.querySelector('.my-pantry-btn');
+let menuOpen = false;
+
 
 window.addEventListener('load', createCards);
 window.addEventListener('load', findTags);
@@ -16,6 +19,8 @@ main.addEventListener('click', addToMyRecipes);
 savedRecipesBtn.addEventListener('click', showSavedRecipes);
 allRecipesBtn.addEventListener('click', showAllRecipes);
 searchBtn.addEventListener('click', searchRecipes);
+pantryBtn.addEventListener("click", toggleMenu);
+
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -53,8 +58,7 @@ function findTags() {
 function listTags(allTags) {
   allTags.forEach(tag => {
     let tagHtml = `<li><input type="checkbox" id="${tag}-checkbox">
-                  <label for="${tag}-checkbox">${tag}</label></li>`
-                  ;
+                  <label for="${tag}-checkbox">${tag}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
@@ -101,6 +105,7 @@ function generateUser() {
       <h1>Welcome ${firstName}!</h1>
     </div>`;
   main.insertAdjacentHTML("afterbegin", welcomeMsg);
+  findPantryInfo();
 }
 
 function addToMyRecipes() {
@@ -149,5 +154,30 @@ function searchRecipes() {
   let searchedRecipes = recipeData.filter(recipe => {
     return recipe.name.includes(searchInput.value);
   });
-  console.log(searchedRecipes);
 }
+
+
+function findPantryInfo() {
+  user.pantry.forEach(item => {
+    console.log(item.ingredient)
+    let itemInfo = ingredientsData.find(ingredient => {
+      return ingredient.id === item.ingredient;
+    });
+
+  if (itemInfo) {
+    let ingredientHtml = `<li><input type="checkbox" id="${itemInfo.name}-checkbox">
+                <label for="${itemInfo.name}-checkbox">${itemInfo.name}</label></li>`;
+    document.querySelector(".pantry-list").insertAdjacentHTML('beforeend', ingredientHtml);
+  }
+  });
+};
+
+function toggleMenu() {
+  var menuDropdown = document.querySelector(".drop-menu");
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    menuDropdown.style.display= "flex";
+  } else {
+    menuDropdown.style.display= "none";
+  }
+};
