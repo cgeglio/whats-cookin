@@ -7,6 +7,9 @@ let allRecipesBtn = document.querySelector('.show-all-btn');
 let user;
 let searchInput = document.querySelector('.search-input');
 let searchBtn = document.querySelector('.search-btn');
+let pantryBtn = document.querySelector('.my-pantry-btn');
+let menuOpen = false;
+
 
 window.addEventListener('load', createCards);
 window.addEventListener('load', findTags);
@@ -16,6 +19,8 @@ main.addEventListener('click', addToMyRecipes);
 savedRecipesBtn.addEventListener('click', showSavedRecipes);
 allRecipesBtn.addEventListener('click', showAllRecipes);
 searchBtn.addEventListener('click', searchRecipes);
+pantryBtn.addEventListener("click", toggleMenu);
+
 
 function createCards() {
   recipeData.forEach(recipe => {
@@ -52,13 +57,13 @@ function findTags() {
   });
   tags.sort();
   listTags(tags);
+  console.log(tags)
 }
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" id="${tag}-checkbox">
-                  <label for="${tag}-checkbox">${capitalize(tag)}</label></li>`
-                  ;
+    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}-checkbox">
+                  <label for="${tag}-checkbox">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
@@ -75,6 +80,7 @@ function findCheckedBoxes() {
   let selectedTags = checkboxInfo.filter(box => {
     return box.checked;
   })
+  console.log(selectedTags)
   findTaggedRecipes(selectedTags);
 }
 
@@ -90,6 +96,8 @@ function findTaggedRecipes(selected) {
       }
     })
   });
+  showAllRecipes();
+  console.log(filteredResults)
   hideUnselectedRecipes(filteredResults);
 }
 
@@ -111,6 +119,7 @@ function generateUser() {
       <h1>Welcome ${firstName}!</h1>
     </div>`;
   main.insertAdjacentHTML("afterbegin", welcomeMsg);
+  findPantryInfo();
 }
 
 function addToMyRecipes() {
@@ -159,5 +168,36 @@ function searchRecipes() {
   let searchedRecipes = recipeData.filter(recipe => {
     return recipe.name.includes(searchInput.value);
   });
-  console.log(searchedRecipes);
 }
+
+function findPantryInfo() {
+  let pantryInfo = [];
+  user.pantry.forEach(item => {
+    let itemInfo = ingredientsData.find(ingredient => {
+      return ingredient.id === item.ingredient;
+    });
+    if(itemInfo && !pantryInfo.includes(itemInfo.name)) {
+      pantryInfo.push({name: itemInfo.name, count: item.amount});
+    }
+  });
+  displayPantryInfo(pantryInfo);
+}
+
+function displayPantryInfo(pantry) {
+  pantry.sort();
+  pantry.forEach(ingredient => {
+    let ingredientHtml = `<li><input type="checkbox" id="${ingredient.name}-checkbox">
+      <label for="${ingredient.name}-checkbox">${ingredient.name}, ${ingredient.count}</label></li>`;
+    document.querySelector(".pantry-list").insertAdjacentHTML('beforeend', ingredientHtml);
+  });
+};
+
+function toggleMenu() {
+  var menuDropdown = document.querySelector(".drop-menu");
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    menuDropdown.style.display= "block";
+  } else {
+    menuDropdown.style.display= "none";
+  }
+};
