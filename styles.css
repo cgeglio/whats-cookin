@@ -35,11 +35,9 @@ h4 {
 
 /* HEADER */
 header {
-  border-bottom: 1px solid white;
   display: flex;
   flex-direction: row;
   grid-area: header;
-  margin: none;
   padding: 1% 0%;
   width: 100%;
 }
@@ -104,8 +102,15 @@ h1 {
 }
 
 /* IMAGE SECTION */
-.featured-image {
+.banner-image {
   grid-area: image;
+  height: 100%;
+  width: 100%;
+}
+
+.apple-banner {
+  height: 100%;
+  width: 100%;
 }
 
 aside {
@@ -212,6 +217,7 @@ span {
   background-color: #84C8A4;
   height: 70px;
   text-align: center;
+  margin-top: 15px;
 }
 
 .my-recipes-banner h1,
