@@ -112,7 +112,6 @@ h1 {
 aside {
   grid-area: aside;
   background-color: white;
-  position: fixed;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -123,8 +122,10 @@ main {
   grid-area: main;
   display: flex;
   justify-content: center;
+  align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
+  min-height: 6000px;
 }
 
 .recipe-card {
@@ -163,7 +164,7 @@ main {
 ul {
   list-style-type: none;
   text-align: left;
-  padding: 0;
+  padding-left: 35px;
 }
 
 li {
@@ -179,7 +180,6 @@ li {
   font-size: 12pt;
   font-weight: bold;
   color: white;
-  margin-top: 15px;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
 }
@@ -188,7 +188,7 @@ li {
   width: 200px;
   height: 40px;
   margin-right: 5%;
-  margin-top:
+  margin-top: 15px;
 }
 
 .filter-btn:hover {
@@ -196,12 +196,11 @@ li {
 }
 
 .wrap {
-  margin-top: 5px;
-  width: auto;
+  width: 200px;
   position: relative;
-  /* height: 450px; */
-  /* overflow: scroll; */
-  padding: 20px;
+  height: 100vh;
+  background-color: white;
+  padding: 10px;
 }
 
 span {
@@ -248,8 +247,6 @@ span {
   color: #359567;
   margin: 0px;
 }
-
-
 
 .pantry-list {
   padding-left: 15px;

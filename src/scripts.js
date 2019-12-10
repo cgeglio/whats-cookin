@@ -53,11 +53,12 @@ function findTags() {
   });
   tags.sort();
   listTags(tags);
+  console.log(tags)
 }
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" id="${tag}-checkbox">
+    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}-checkbox">
                   <label for="${tag}-checkbox">${tag}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
@@ -69,6 +70,7 @@ function findCheckedBoxes() {
   let selectedTags = checkboxInfo.filter(box => {
     return box.checked;
   })
+  console.log(selectedTags)
   findTaggedRecipes(selectedTags);
 }
 
@@ -84,6 +86,8 @@ function findTaggedRecipes(selected) {
       }
     })
   });
+  showAllRecipes();
+  console.log(filteredResults)
   hideUnselectedRecipes(filteredResults);
 }
 
