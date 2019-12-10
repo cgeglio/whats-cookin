@@ -53,10 +53,16 @@ function findTags() {
 function listTags(allTags) {
   allTags.forEach(tag => {
     let tagHtml = `<li><input type="checkbox" id="${tag}-checkbox">
-                  <label for="${tag}-checkbox">${tag}</label></li>`
+                  <label for="${tag}-checkbox">${capitalize(tag)}</label></li>`
                   ;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
+}
+
+function capitalize(words) {
+  return words.split(' ').map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
 }
 
 function findCheckedBoxes() {
