@@ -36,7 +36,7 @@ function createCards() {
         <div class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
           <div class="text">
-            <div>Click Card for<br>Ingredients & Instructions</div>
+            <div>Click for Instructions</div>
           </div>
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
