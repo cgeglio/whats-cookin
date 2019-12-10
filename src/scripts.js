@@ -57,7 +57,6 @@ function findTags() {
   });
   tags.sort();
   listTags(tags);
-  console.log(tags)
 }
 
 function listTags(allTags) {
@@ -80,7 +79,6 @@ function findCheckedBoxes() {
   let selectedTags = checkboxInfo.filter(box => {
     return box.checked;
   })
-  console.log(selectedTags)
   findTaggedRecipes(selectedTags);
 }
 
@@ -97,7 +95,6 @@ function findTaggedRecipes(selected) {
     })
   });
   showAllRecipes();
-  console.log(filteredResults)
   hideUnselectedRecipes(filteredResults);
 }
 
@@ -176,15 +173,21 @@ function findPantryInfo() {
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
-    if(itemInfo && !pantryInfo.includes(itemInfo.name)) {
+    let originalIngredient = pantryInfo.find(ingredient => {
+      if (itemInfo) {
+        return ingredient.name === itemInfo.name;
+      }
+    });
+    if (itemInfo && originalIngredient) {
+      originalIngredient.count += item.amount;
+    } else if (itemInfo) {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
-  displayPantryInfo(pantryInfo);
+  displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
 function displayPantryInfo(pantry) {
-  pantry.sort();
   pantry.forEach(ingredient => {
     let ingredientHtml = `<li><input type="checkbox" id="${ingredient.name}-checkbox">
       <label for="${ingredient.name}-checkbox">${ingredient.name}, ${ingredient.count}</label></li>`;
