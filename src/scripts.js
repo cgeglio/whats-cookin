@@ -156,19 +156,25 @@ function searchRecipes() {
   });
 }
 
-
 function findPantryInfo() {
+  let pantryInfo = [];
   user.pantry.forEach(item => {
-    console.log(item.ingredient)
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
+    if(itemInfo && !pantryInfo.includes(itemInfo.name)) {
+      pantryInfo.push(itemInfo.name);
+    }
+  });
+  displayPantryInfo(pantryInfo);
+}
 
-  if (itemInfo) {
-    let ingredientHtml = `<li><input type="checkbox" id="${itemInfo.name}-checkbox">
-                <label for="${itemInfo.name}-checkbox">${itemInfo.name}</label></li>`;
+function displayPantryInfo(pantry) {
+  pantry.sort();
+  pantry.forEach(ingredient => {
+    let ingredientHtml = `<li><input type="checkbox" id="${ingredient}-checkbox">
+      <label for="${ingredient}-checkbox">${ingredient}</label></li>`;
     document.querySelector(".pantry-list").insertAdjacentHTML('beforeend', ingredientHtml);
-  }
   });
 };
 
