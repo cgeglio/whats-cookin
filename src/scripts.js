@@ -1,3 +1,4 @@
+let body = document.querySelector('body');
 let main = document.querySelector('main');
 let tagList = document.querySelector('.tag-list');
 let recipes = [];
@@ -11,6 +12,7 @@ let pantryBtn = document.querySelector('.my-pantry-btn');
 let showPantryRecipes = document.querySelector('.show-pantry-recipes-btn')
 let menuOpen = false;
 let pantryInfo = [];
+let fullRecipeInfo = document.querySelector('.recipe-instructions');
 
 
 window.addEventListener('load', createCards);
@@ -39,7 +41,7 @@ function createCards() {
         <div class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
           <div class="text">
-            <div>Click Card for<br>Ingredients & Instructions</div>
+            <div>Click for Instructions</div>
           </div>
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
@@ -123,6 +125,7 @@ function generateUser() {
 }
 
 function addToMyRecipes() {
+  // console.log(event.target);
   if (event.target.className === "card-apple-icon") {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.favoriteRecipes.includes(cardId)) {
@@ -132,7 +135,74 @@ function addToMyRecipes() {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
     };
-  };
+  } else if (event.target.id === 'exit-recipe-btn') {
+    exitRecipe();
+  // } else if (event.target.parentNode.className === "card-photo-container" || event.target.parentNode.className === "recipe-card") {
+  } else if (isDescendant(event.target.closest('.recipe-card'), event.target)) {
+    openRecipeInfo(event);
+  }
+}
+
+function isDescendant(parent, child) {
+  console.log(parent);
+  let node = child;
+  while (node != null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+}
+
+function openRecipeInfo(event) {
+  fullRecipeInfo.style.display = 'inline';
+  let recipeId = event.path.find(e => e.id).id;
+  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
+  generateRecipeTitle(recipe, generateIngredients(recipe));
+  addRecipeImage(recipe);
+  generateInstructions(recipe);
+  fullRecipeInfo.insertAdjacentHTML("beforebegin", '<section id="overlay"></div>');
+}
+
+function generateRecipeTitle(recipe, ingredients) {
+  let recipeTitle = `
+    <button id="exit-recipe-btn">X</button>
+    <h3 id="recipe-title">${recipe.name}</h3>
+    <h4>Recipe Ingredients</h4>
+    <p>${ingredients}</p>`
+  fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+}
+
+function addRecipeImage(recipe) {
+  console.log(document.getElementById('recipe-title'));
+  document.getElementById('recipe-title').style.backgroundImage = `url(${recipe.image})`;
+}
+
+function generateIngredients(recipe) {
+  return recipe && recipe.ingredients.map(i => {
+    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+  }).join(', ');
+}
+
+function generateInstructions(recipe) {
+  let instructionsList = '';
+  let instructions = recipe.instructions.map(i => {
+    return i.instruction
+  });
+  instructions.forEach(i => {
+    instructionsList += `
+      <li>${i}</li>
+      `
+  });
+  fullRecipeInfo.insertAdjacentHTML("beforeend", '<h4>Instructions</h4>');
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+}
+
+function exitRecipe() {
+  while(fullRecipeInfo.firstChild && fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+  fullRecipeInfo.style.display = 'none';
+  document.getElementById('overlay').remove();
 }
 
 function showSavedRecipes() {
