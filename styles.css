@@ -256,6 +256,7 @@ li {
   margin: 2px;
 }
 
+.show-pantry-recipes-btn,
 .show-all-btn,
 .filter-btn {
   background-color: #359567;
@@ -267,6 +268,10 @@ li {
   color: white;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
+}
+
+.show-pantry-recipes-btn {
+  margin-top: 10px;
 }
 
 .show-all-btn {

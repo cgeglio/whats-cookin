@@ -8,6 +8,7 @@ let user;
 let searchInput = document.querySelector('.search-input');
 let searchBtn = document.querySelector('.search-btn');
 let pantryBtn = document.querySelector('.my-pantry-btn');
+let showPantryRecipes = document.querySelector('.show-pantry-recipes-btn')
 let menuOpen = false;
 let pantryInfo = [];
 
@@ -20,7 +21,8 @@ main.addEventListener('click', addToMyRecipes);
 savedRecipesBtn.addEventListener('click', showSavedRecipes);
 allRecipesBtn.addEventListener('click', showAllRecipes);
 searchBtn.addEventListener('click', searchRecipes);
-pantryBtn.addEventListener("click", toggleMenu);
+pantryBtn.addEventListener('click', toggleMenu);
+showPantryRecipes.addEventListener('click', findCheckedPantryBoxes)
 
 
 function createCards() {
@@ -211,6 +213,7 @@ function findCheckedPantryBoxes() {
   let selectedIngredients = pantryCheckboxInfo.filter(box => {
     return box.checked;
   })
+  showAllRecipes();
   findRecipesWithCheckedIngredients(selectedIngredients);
 }
 
