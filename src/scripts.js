@@ -8,7 +8,7 @@ let pantryInfo = [];
 let recipes = [];
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
-let searchInput = document.querySelector(".search-input");
+let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let user;
@@ -224,12 +224,6 @@ function exitRecipe() {
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
   fullRecipeInfo.style.display = "none";
   document.getElementById("overlay").remove();
-}
-
-function searchRecipes() {
-  let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.includes(searchInput.value);
-  });
 }
 
 // TOGGLE DISPLAYS
