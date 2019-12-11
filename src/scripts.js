@@ -115,7 +115,7 @@ function generateUser() {
     <div class="welcome-msg">
       <h1>Welcome ${firstName}!</h1>
     </div>`;
-  main.insertAdjacentHTML("afterbegin", welcomeMsg);
+  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin", welcomeMsg);
   findPantryInfo();
 }
 
@@ -145,7 +145,7 @@ function showSavedRecipes() {
 
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
-  document.querySelector(".my-recipes-banner").style.display = "flex";
+  document.querySelector(".my-recipes-banner").style.display = "block";
 }
 
 function showAllRecipes() {
