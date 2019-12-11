@@ -50,36 +50,35 @@ h1 {
   font-family: 'Sulphur Point', sans-serif;
   font-size: 50px;
   margin: 0%;
-  padding: 0% 0.7%;
+  padding: 0.5% 0.7% 0%;
   width: 70%;
 }
 
 #search {
   border-radius: 15px 15px 15px 15px;
-  border: 4px inset #C4EB67;
+  border: 3px outset #C4EB67;
   box-shadow: 0px 0px 7px 0px #475d74;
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
   justify-content: center;
-  margin: 1.2% 0.5% 1% 0%;
+  margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
 }
 
 #search-input {
   background-color: #b6dcca;
-  background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(102, 120, 148)), color-stop(1, rgb(225,225,225)));
+  background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
   border-radius: 10px 0px 0px 10px;
   border: none;
   box-shadow: inset -3px -1px 20px 1px #5c7894;
-  color: #C4EB67;
+  color: #5B7894;
   font-family: 'Quicksand', sans-serif;
-  font-size: 45px;
+  font-size: 42px;
   height: 100%;
   outline: none;
   padding: 0% 2% 0% 0%;
   text-align: right;
-  text-shadow: 0px 2px 4px black;
   transition: .8s ease;
   width: 100%;
 }
@@ -89,6 +88,10 @@ h1 {
   transition: .8s ease;
 }
 
+#search-input:focus {
+  box-shadow: inset 0px 0px 0px 0px white;
+}
+
 #search-input::placeholder {
   color: #5B7894;
   font-size: 20px;
@@ -96,6 +99,10 @@ h1 {
   text-shadow: none;
 }
 
+#search-input:focus::placeholder {
+  font-size: 0px;
+  transition: .8s ease;
+}
 
 .search-label {
   display: none;
@@ -121,8 +128,9 @@ h1 {
 }
 
 .search-btn {
-  border-left: 4px double #C4EB67;
+  border-left: 3px outset #C4EB67;
   border-radius: 0px 15px 15px 0px;
+  padding: 1%;
 }
 
 .nav-btn:hover {
@@ -345,13 +353,14 @@ span {
 .recipe-instructions {
   background: white;
   border: 3px solid #C4EB67;
+  border-radius: 10px;
   position: fixed;
   height: 70%;
-  width: 50%;
+  width: 70%;
   margin: 0;
-  padding: 1% 2% 1% 1%;
+  padding: 1% 1% 1% 1%;
   top: 15%;
-  left: 25%;
+  right: 15%;
   z-index: 1000;
   overflow-x: scroll;
   box-shadow: 1px 1px 115px black;
@@ -376,14 +385,18 @@ span {
   transition: .3s ease;
 }
 
-.recipe-instructions h3 {
+#recipe-title {
   text-align: center;
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("images/green-apples.jpg");
+  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid black;
+  border-radius: 7px 7px 0px 0px;
   color: white;
   margin: 0;
   padding: 5%;
   font-size: 30px;
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 0px 0px 6px black;
 }
 
 .recipe-instructions h4 {
@@ -393,4 +406,21 @@ span {
 
 .recipe-instructions p {
   margin-left: 2%;
+}
+
+.recipe-instructions ol {
+  margin-right: 2%;
+  pointer-events:
+}
+
+#overlay {
+   position:fixed;
+   top:0;
+   left:0;
+   height:100%;
+   width:100%;
+   z-index:100;
+   background-color: #5B7894;
+   opacity:0.5;
+   filter:alpha(opacity=50);
 }
