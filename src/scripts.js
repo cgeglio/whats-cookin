@@ -182,7 +182,7 @@ function openRecipeInfo(event) {
   generateRecipeTitle(recipe, generateIngredients(recipe));
   addRecipeImage(recipe);
   generateInstructions(recipe);
-  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id="overlay"></div>");
+  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
 }
 
 function generateRecipeTitle(recipe, ingredients) {
