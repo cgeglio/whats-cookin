@@ -100,9 +100,10 @@ function findTaggedRecipes(selected) {
       }
     })
   });
-  console.log(filteredResults)
   showAllRecipes();
-  hideUnselectedRecipes(filteredResults);
+  if (filteredResults.length > 0) {
+    hideUnselectedRecipes(filteredResults);
+  }
 }
 
 function hideUnselectedRecipes(filtered) {
