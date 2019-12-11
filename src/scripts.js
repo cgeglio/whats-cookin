@@ -26,7 +26,7 @@ searchBtn.addEventListener('click', searchRecipes);
 showPantryRecipes.addEventListener('click', findCheckedPantryBoxes)
 
 
-// Generate a user on load
+// GENERATE A USER ON LOAD
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(' ')[0];
@@ -39,7 +39,7 @@ function generateUser() {
   findPantryInfo();
 }
 
-//Create recipe cards
+// CREATE RECIPE CARDS
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
@@ -68,7 +68,7 @@ function addToDom(recipeInfo, shortRecipeName) {
   main.insertAdjacentHTML("beforeend", cardHtml);
 }
 
-//Filter by recipe tags
+// FILTER BY RECIPE TAGS
 function findTags() {
   let tags = [];
   recipeData.forEach(recipe => {
@@ -133,7 +133,7 @@ function hideUnselectedRecipes(filtered) {
   });
 }
 
-// Favorite recipe functionality
+// FAVORITE RECIPE FUNCTIONALITY
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon") {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
@@ -174,7 +174,7 @@ function showSavedRecipes() {
   showMyRecipesBanner();
 }
 
-// Create and display recipe instructions
+// CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) {
   fullRecipeInfo.style.display = 'inline';
   let recipeId = event.path.find(e => e.id).id;
@@ -229,7 +229,7 @@ function searchRecipes() {
   });
 }
 
-// Toggle displays
+// TOGGLE DISPLAYS
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
   document.querySelector(".my-recipes-banner").style.display = "block";
@@ -258,7 +258,7 @@ function showAllRecipes() {
   showWelcomeBanner();
 }
 
-// Create and use pantry
+// CREATE AND USE PANTRY
 function findPantryInfo() {
   user.pantry.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
