@@ -1,51 +1,23 @@
-# What's Cookin'? Starter Kit 
+# Fresh Picks
+Collaborators: Kyle Cornelissen & Carla Geglio
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+## Description
+For our Mod 2 Pair Project, we created a recipe tracking application that allows users to view and favorite recipes. Users can also search for recipes by type, name, or ingredient. Finally, users can determine what recipes they could cook based on selected ingredients from their pantry.
 
-## Set Up 
+## Set Up
+1. Fork this repository and clone down.
+2. Inside of the project directory, install the project dependencies by running npm install.
+3. Run open src/index.html in the terminal to see the HTML page.
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
+## Directions
+1. Filter recipes by type: on the left sidebar, check the desired recipe types and then click "Filter."
+2. Search for a recipe by name or ingredient: type the name of the recipe or ingredient into the searchbar at the top of the page and click the magnifying glass.
+3. View a recipe: click on the recipe card to the recipe instructions and ingredients.
+4. Favorite a recipe: click the apple icon on a recipe card and it will be saved to your favorite recipes. To view your favorite recipes, click the "My Recipes" button at the top right of the page.
+5. View your pantry: click the "My Pantry" button at the top right of the page. To determine which recipes require a certain ingredient, check the box next to the ingredient and then click "What Can I Make?"
 
-## Testing 
+![Main Page](images/mainpage_readme.png)
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
+![My Recipes](images/myrecipes_readme.png)
 
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
-
-
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
-
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
-
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+![My Pantry](images/mypantry_readme.png)
