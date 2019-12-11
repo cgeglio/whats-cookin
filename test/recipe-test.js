@@ -37,7 +37,7 @@ describe('Recipe', function() {
     const ingredient = {
       "id": 20081,
       "name": "all purpose flour",
-      "quanitity": {
+      "quantity": {
         "amount": 1.5,
         "unit": "c"
       }
