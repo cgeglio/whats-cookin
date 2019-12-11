@@ -123,10 +123,14 @@ function findTaggedRecipes(selected) {
   }
 }
 
-function hideUnselectedRecipes(filtered) {
+function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
+  hideUnselectedRecipes(foundRecipes)
+}
+
+function hideUnselectedRecipes(foundRecipes) {
   foundRecipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
@@ -146,7 +150,6 @@ function addToMyRecipes() {
     }
   } else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
-
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
@@ -189,7 +192,7 @@ function generateRecipeTitle(recipe, ingredients) {
   let recipeTitle = `
     <button id="exit-recipe-btn">X</button>
     <h3 id="recipe-title">${recipe.name}</h3>
-    <h4>Recipe Ingredients</h4>
+    <h4>Ingredients</h4>
     <p>${ingredients}</p>`
   fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
 }
@@ -240,6 +243,28 @@ function showWelcomeBanner() {
   document.querySelector(".my-recipes-banner").style.display = "none";
 }
 
+function searchRecipes() {
+  showAllRecipes();
+  let searchedRecipes = recipeData.filter(recipe => {
+    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+  });
+  filterNonSearched(createRecipeObject(searchedRecipes));
+}
+
+function filterNonSearched(filtered) {
+  console.log(recipes);
+  let found = recipes.filter(recipe => {
+    let ids = filtered.map(f => f.id);
+    return !ids.includes(recipe.id)
+  })
+  hideUnselectedRecipes(found);
+}
+
+function createRecipeObject(recipes) {
+  recipes = recipes.map(recipe => new Recipe(recipe));
+  return recipes
+}
+
 function toggleMenu() {
   var menuDropdown = document.querySelector(".drop-menu");
   menuOpen = !menuOpen;
@@ -256,7 +281,6 @@ function showAllRecipes() {
     domRecipe.style.display = "block";
   });
   showWelcomeBanner();
-}
 
 // CREATE AND USE PANTRY
 function findPantryInfo() {
