@@ -281,6 +281,7 @@ function showAllRecipes() {
     domRecipe.style.display = "block";
   });
   showWelcomeBanner();
+}
 
 // CREATE AND USE PANTRY
 function findPantryInfo() {
