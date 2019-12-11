@@ -9,6 +9,7 @@ let searchInput = document.querySelector('.search-input');
 let searchBtn = document.querySelector('.search-btn');
 let pantryBtn = document.querySelector('.my-pantry-btn');
 let menuOpen = false;
+let pantryInfo = [];
 
 
 window.addEventListener('load', createCards);
@@ -168,7 +169,6 @@ function searchRecipes() {
 }
 
 function findPantryInfo() {
-  let pantryInfo = [];
   user.pantry.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
@@ -189,8 +189,8 @@ function findPantryInfo() {
 
 function displayPantryInfo(pantry) {
   pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" id="${ingredient.name}-checkbox">
-      <label for="${ingredient.name}-checkbox">${ingredient.name}, ${ingredient.count}</label></li>`;
+    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
     document.querySelector(".pantry-list").insertAdjacentHTML('beforeend', ingredientHtml);
   });
 };
@@ -204,3 +204,29 @@ function toggleMenu() {
     menuDropdown.style.display= "none";
   }
 };
+
+function findCheckedPantryBoxes() {
+  let pantryCheckboxes = document.querySelectorAll('.pantry-checkbox');
+  let pantryCheckboxInfo = Array.from(pantryCheckboxes)
+  let selectedIngredients = pantryCheckboxInfo.filter(box => {
+    return box.checked;
+  })
+  findRecipesWithCheckedIngredients(selectedIngredients);
+}
+
+function findRecipesWithCheckedIngredients(selected) {
+  let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
+  let ingredientNames = selected.map(item => {
+    return item.id;
+  })
+  recipes.forEach(recipe => {
+    let allRecipeIngredients = [];
+    recipe.ingredients.forEach(ingredient => {
+      allRecipeIngredients.push(ingredient.name);
+    });
+    if(!recipeChecker(allRecipeIngredients, ingredientNames)) {
+        let domRecipe = document.getElementById(`${recipe.id}`);
+         domRecipe.style.display = "none";
+       }
+  })
+}
