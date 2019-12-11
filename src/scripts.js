@@ -66,8 +66,8 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}-checkbox">
-                  <label for="${tag}-checkbox">${capitalize(tag)}</label></li>`;
+    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
+                  <label for="${tag}">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
@@ -90,8 +90,9 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
+    console.log(tag)
     let allRecipes = recipes.filter(recipe => {
-      return recipe.tags.includes(tag.parentNode.innerText.trim());
+      return recipe.tags.includes(tag.id);
     });
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
@@ -99,6 +100,7 @@ function findTaggedRecipes(selected) {
       }
     })
   });
+  console.log(filteredResults)
   showAllRecipes();
   hideUnselectedRecipes(filteredResults);
 }
