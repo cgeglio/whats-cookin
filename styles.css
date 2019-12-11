@@ -1,16 +1,26 @@
 body {
-  -webkit-font-smoothing: auto;
   background-color: #5B7894;
   display: grid;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
     "image image"
     "aside main";
-  padding: 0;
-  margin: 0;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: auto;
+}
+
+h1 {
+  align-self: center;
+  color: white;
+  font-family: "Sulphur Point", sans-serif;
+  font-size: 50px;
+  margin: 0%;
+  padding: 0.5% 0.7% 0%;
+  width: 70%;
 }
 
 h2 {
@@ -20,20 +30,21 @@ h2 {
 
 h3 {
   color: #359567;
-  margin: 5px 5px 10px 0px;
-  height: 17%;
   cursor: pointer;
+  height: 17%;
+  margin: 5px 5px 10px 0px;
   transition: .8s ease;
 }
 
 h4 {
   color: #359567;
   background-color: #C4EB67;
-  width: max-content;
+  border-radius: 3px;
   margin: 10px 0px 0px 0px;
   padding: 1px 4px 1px 4px;
-  border-radius: 3px;
+  width: max-content;
 }
+
 
 /* HEADER */
 header {
@@ -44,14 +55,15 @@ header {
   width: 100%;
 }
 
-h1 {
-  align-self: center;
-  color: white;
-  font-family: 'Sulphur Point', sans-serif;
-  font-size: 50px;
-  margin: 0%;
-  padding: 0.5% 0.7% 0%;
-  width: 70%;
+span {
+  color: #C4EB67;
+  font-weight: 400;
+}
+
+.header-apple-icon {
+  height: 40px;
+  margin-left: 5px;
+  width: 35px;
 }
 
 #search {
@@ -60,7 +72,7 @@ h1 {
   box-shadow: 0px 0px 7px 0px #475d74;
   display: flex;
   flex-direction: row;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   justify-content: center;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
@@ -73,7 +85,7 @@ h1 {
   border: none;
   box-shadow: inset -3px -1px 20px 1px #5c7894;
   color: #5B7894;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 42px;
   height: 100%;
   outline: none;
@@ -108,6 +120,12 @@ h1 {
   display: none;
 }
 
+.search-btn {
+  border-left: 3px outset #C4EB67;
+  border-radius: 0px 15px 15px 0px;
+  padding: 1%;
+}
+
 .nav-btn {
   align-items: center;
   background: #5B7894 no-repeat;
@@ -115,36 +133,32 @@ h1 {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  outline: none;
-  text-align: center;
-  width: 15%;
-  margin: 0%;
-  align-items: center;
-  overflow: hidden;
   font-size: 0px;
   font-weight: 700;
+  justify-content: center;
+  margin: 0%;
+  outline: none;
+  overflow: hidden;
+  text-align: center;
   transition: .4s ease;
-}
-
-.search-btn {
-  border-left: 3px outset #C4EB67;
-  border-radius: 0px 15px 15px 0px;
-  padding: 1%;
+  width: 15%;
 }
 
 .nav-btn:hover {
   color: #C4EB67;
-  text-shadow: 0px 2px 4px black;
   font-size: 14px;
+  text-shadow: 0px 2px 4px black;
   transition: .4s ease;
 }
 
 .nav-btn img {
-  padding: 2px 0px;
-  max-width: 40px;
   max-height: 40px;
+  max-width: 40px;
+  padding: 2px 0px;
+}
 
+.saved-ingredients-btn {
+  border-left: 3px solid #C4EB67;
 }
 
 .ing-pan-btn {
@@ -152,47 +166,87 @@ h1 {
   padding: 1px 6px 5px 0px;
 }
 
-.saved-ingredients-btn {
-  border-left: 3px solid #C4EB67;
-}
 
-/* IMAGE SECTION */
+/* BANNER IMAGE*/
 .banner-image {
+  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("images/green-apples.jpg");
   grid-area: image;
   height: 150px;
-  width: 100%;
   overflow: hidden;
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("images/green-apples.jpg");
+  width: 100%;
 }
 
-aside {
-  grid-area: aside;
-  background-color: white;
+.my-recipes-banner,
+.welcome-msg {
   text-align: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
+  width: 95%;
 }
 
-main {
-  grid-area: main;
+.my-recipes-banner h1,
+.welcome-msg h1 {
+  color: white;
+  width: 100%;
+}
+
+.my-recipes-banner {
+  display: none;
+  margin-top: 25px;
+}
+
+.welcome-msg {
+  margin-top: 50px;
+}
+
+
+/* FILTER SIDEBAR */
+aside {
+  background-color: white;
   display: flex;
+  grid-area: aside;
+  height: 100%;
   justify-content: center;
+  text-align: center;
+}
+
+.wrap {
+  background-color: white;
+  height: 100vh;
+  padding: 10px;
+  position: relative;
+  width: 200px;
+}
+
+ul {
+  list-style-type: none;
+  text-align: left;
+  padding-left: 35px;
+}
+
+li {
+  margin: 2px;
+}
+
+
+/* RECIPE CARD SECTION */
+main {
   align-content: flex-start;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  grid-area: main;
+  justify-content: center;
   min-height: 6000px;
 }
 
 .recipe-card {
-  border: 2px solid #C4EB67;
   background-color: white;
+  border: 2px solid #C4EB67;
   border-radius: 7px;
-  height: 270px;
-  padding: 15px;
-  margin: 20px;
-  width: 250px;
   cursor: pointer;
+  height: 270px;
+  margin: 20px;
+  padding: 15px;
+  width: 250px;
 }
 
 .recipe-card:hover .card-photo-preview {
@@ -201,10 +255,10 @@ main {
 }
 
 .recipe-card:hover .text {
-  opacity: 100%;
-  width: 100%;
   font-size: 20px;
+  opacity: 100%;
   transition: .5s ease;
+  width: 100%;
 }
 
 .recipe-card:hover h3 {
@@ -213,17 +267,11 @@ main {
 }
 
 .card-apple-icon {
-  height: 50px;
-  width: 45px;
-  padding-bottom: 10px;
-  float: right;
   cursor: pointer;
-}
-
-.header-apple-icon {
-  height: 40px;
-  margin-left: 5px;
-  width: 35px;
+  float: right;
+  height: 50px;
+  padding-bottom: 10px;
+  width: 45px;
 }
 
 .card-photo-preview {
@@ -258,28 +306,20 @@ main {
   transition: .5s ease;
 }
 
-ul {
-  list-style-type: none;
-  text-align: left;
-  padding-left: 35px;
-}
 
-li {
-  margin: 2px;
-}
-
+/* BUTTONS */
 .show-pantry-recipes-btn,
 .show-all-btn,
 .filter-btn {
   background-color: #359567;
   border: 0;
   border-radius: 3px;
-  font-family: 'Quicksand', sans-serif;
+  color: white;
+  cursor: pointer;
+  font-family: "Quicksand", sans-serif;
   font-size: 12pt;
   font-weight: bold;
-  color: white;
   padding: 5px 10px 5px 10px;
-  cursor: pointer;
 }
 
 .show-pantry-recipes-btn {
@@ -287,61 +327,29 @@ li {
 }
 
 .show-all-btn {
-  width: 200px;
   height: 40px;
   margin-top: 20px;
+  width: 200px;
 }
 
 .filter-btn:hover {
   background-color: #84C8A4;
 }
 
-.wrap {
-  width: 200px;
-  position: relative;
-  height: 100vh;
-  background-color: white;
-  padding: 10px;
-}
 
-span {
-  font-weight: 400;
-  color: #C4EB67;
-}
-
-.my-recipes-banner,
-.welcome-msg {
-  width: 95%;
-  text-align: center;
-}
-
-.my-recipes-banner h1,
-.welcome-msg h1 {
-  width: 100%;
-  color: white;
-}
-
-.my-recipes-banner {
-  display: none;
-  margin-top: 25px;
-}
-
-.welcome-msg {
-  margin-top: 50px;
-}
-
+/* PANTRY LIST */
 .drop-menu {
   align-items: center;
   background-color: #DAE4EE;
   display: none;
+  height: 600px;
+  margin-left: 81%;
   margin-top: 92px;
   overflow: scroll;
-  height: 600px;
-  width: 250px;
-  text-align: center;
-  position: absolute;
   padding: 12px;
-  margin-left: 81%;
+  position: absolute;
+  text-align: center;
+  width: 250px;
   z-index: 3;
 }
 
@@ -351,26 +359,28 @@ span {
 }
 
 .pantry-list {
+  color: #000000;
   padding-left: 15px;
   text-align: left;
-  color: #000000;
 }
 
+
+/* RECIPE INSTRUCTIONS */
 .recipe-instructions {
   background: white;
   border: 3px solid #C4EB67;
   border-radius: 10px;
-  position: fixed;
-  height: 70%;
-  width: 70%;
-  margin: 0;
-  padding: 1% 1% 1% 1%;
-  top: 15%;
-  right: 15%;
-  z-index: 1000;
-  overflow-x: scroll;
   box-shadow: 1px 1px 115px black;
   display: none;
+  height: 70%;
+  margin: 0;
+  overflow-x: scroll;
+  padding: 1% 1% 1% 1%;
+  position: fixed;
+  right: 15%;
+  top: 15%;
+  width: 70%;
+  z-index: 1000;
 }
 
 #exit-recipe-btn {
@@ -392,22 +402,22 @@ span {
 }
 
 #recipe-title {
-  text-align: center;
   background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
   background-repeat: no-repeat;
   background-size: cover;
   border: 2px solid black;
   border-radius: 7px 7px 0px 0px;
   color: white;
+  font-size: 30px;
   margin: 0;
   padding: 5%;
-  font-size: 30px;
+  text-align: center;
   text-shadow: 0px 0px 6px black;
 }
 
 .recipe-instructions h4 {
-  color: #359567;
   background: white;
+  color: #359567;
 }
 
 .recipe-instructions p {
@@ -416,17 +426,16 @@ span {
 
 .recipe-instructions ol {
   margin-right: 2%;
-  pointer-events:
 }
 
 #overlay {
-   position:fixed;
-   top:0;
-   left:0;
-   height:100%;
-   width:100%;
-   z-index:100;
-   background-color: #5B7894;
-   opacity:0.5;
-   filter:alpha(opacity=50);
+  filter:alpha(opacity=50);
+  background-color: #5B7894;
+  height:100%;
+  left:0;
+  opacity:0.5;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:100;
 }
