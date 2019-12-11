@@ -171,7 +171,7 @@ aside {
   text-align: center;
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: auto;
 }
 
 main {
@@ -181,7 +181,6 @@ main {
   align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: 6000px;
 }
 
 .recipe-card {
@@ -393,10 +392,8 @@ span {
 
 #recipe-title {
   text-align: center;
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
   background-repeat: no-repeat;
   background-size: cover;
-  border: 2px solid black;
   border-radius: 7px 7px 0px 0px;
   color: white;
   margin: 0;
