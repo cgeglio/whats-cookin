@@ -9,7 +9,8 @@ let searchInput = document.querySelector('.search-input');
 let searchBtn = document.querySelector('.search-btn');
 let pantryBtn = document.querySelector('.my-pantry-btn');
 let menuOpen = false;
-
+let fullRecipeInfo = document.querySelector('.recipe-instructions');
+let exitRecipeBtn = document.getElementById('exit-recipe-btn');
 
 window.addEventListener('load', createCards);
 window.addEventListener('load', findTags);
@@ -19,7 +20,8 @@ main.addEventListener('click', addToMyRecipes);
 savedRecipesBtn.addEventListener('click', showSavedRecipes);
 allRecipesBtn.addEventListener('click', showAllRecipes);
 searchBtn.addEventListener('click', searchRecipes);
-pantryBtn.addEventListener("click", toggleMenu);
+pantryBtn.addEventListener('click', toggleMenu);
+exitRecipeBtn('click', exitRecipe);
 
 
 function createCards() {
@@ -129,7 +131,52 @@ function addToMyRecipes() {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
     };
-  };
+  } else if (event.target.parentNode.className === "card-photo-container" || "recipe-card") {
+    openRecipeInfo(event);
+  }
+}
+
+function openRecipeInfo(event) {
+  expandRecipeCard();
+  let recipeId = event.path.find(e => e.id).id;
+  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
+  let ingredients = generateIngredients(recipe);
+  generateRecipeTitle(recipe, ingredients);
+  generateInstructions(recipe);
+}
+
+function expandRecipeCard() {
+  while(fullRecipeInfo.firstChild && fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+  fullRecipeInfo.style.display = 'inline';
+}
+
+function generateRecipeTitle(recipe, ingredients) {
+  let recipeTitle = `
+    <button id="exit-recipe-btn">X</button>
+    <h3>${recipe.name}</h3>
+    <h4>Recipe Ingredients</h4>
+    <p>${ingredients}</p>`
+  fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+}
+
+function generateIngredients(recipe) {
+  return recipe.ingredients.map(i => {
+    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+  }).join(', ');
+}
+
+function generateInstructions(recipe) {
+  let instructionsList = '';
+  let instructions = recipe.instructions.map(i => {
+    return i.instruction
+  });
+  instructions.forEach(i => {
+    instructionsList += `
+      <li>${i}</li>
+      `
+  });
+  fullRecipeInfo.insertAdjacentHTML("beforeend", '<h4>Instructions</h4>');
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
 }
 
 function showSavedRecipes() {
