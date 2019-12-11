@@ -119,7 +119,7 @@ function findTaggedRecipes(selected) {
   });
   showAllRecipes();
   if (filteredResults.length > 0) {
-    hideUnselectedRecipes(filteredResults);
+    filterRecipes(filteredResults);
   }
 }
 
@@ -246,7 +246,6 @@ function searchRecipes() {
 }
 
 function filterNonSearched(filtered) {
-  console.log(recipes);
   let found = recipes.filter(recipe => {
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
