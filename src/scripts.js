@@ -1,30 +1,45 @@
-let main = document.querySelector('main');
-let tagList = document.querySelector('.tag-list');
-let recipes = [];
-let filterBtn = document.querySelector('.filter-btn');
-let savedRecipesBtn = document.querySelector('.saved-recipes-btn');
 let allRecipesBtn = document.querySelector('.show-all-btn');
-let user;
-let searchInput = document.querySelector('.search-input');
-let searchBtn = document.querySelector('.search-btn');
-let pantryBtn = document.querySelector('.my-pantry-btn');
-let showPantryRecipes = document.querySelector('.show-pantry-recipes-btn')
-let menuOpen = false;
-let pantryInfo = [];
+let filterBtn = document.querySelector('.filter-btn');
 let fullRecipeInfo = document.querySelector('.recipe-instructions');
+let main = document.querySelector('main');
+let menuOpen = false;
+let pantryBtn = document.querySelector('.my-pantry-btn');
+let pantryInfo = [];
+let recipes = [];
+let savedRecipesBtn = document.querySelector('.saved-recipes-btn');
+let searchBtn = document.querySelector('.search-btn');
+let searchInput = document.querySelector('.search-input');
+let showPantryRecipes = document.querySelector('.show-pantry-recipes-btn');
+let tagList = document.querySelector('.tag-list');
+let user;
+
 
 window.addEventListener('load', createCards);
 window.addEventListener('load', findTags);
 window.addEventListener('load', generateUser);
+allRecipesBtn.addEventListener('click', showAllRecipes);
 filterBtn.addEventListener('click', findCheckedBoxes);
 main.addEventListener('click', addToMyRecipes);
-savedRecipesBtn.addEventListener('click', showSavedRecipes);
-allRecipesBtn.addEventListener('click', showAllRecipes);
-searchBtn.addEventListener('click', searchRecipes);
 pantryBtn.addEventListener('click', toggleMenu);
+savedRecipesBtn.addEventListener('click', showSavedRecipes);
+searchBtn.addEventListener('click', searchRecipes);
 showPantryRecipes.addEventListener('click', findCheckedPantryBoxes)
 
 
+// Generate a user on load
+function generateUser() {
+  user = new User(users[Math.floor(Math.random() * users.length)]);
+  let firstName = user.name.split(' ')[0];
+  let welcomeMsg = `
+    <div class="welcome-msg">
+      <h1>Welcome ${firstName}!</h1>
+    </div>`;
+  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
+    welcomeMsg);
+  findPantryInfo();
+}
+
+//Create recipe cards
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
@@ -33,22 +48,27 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + '...';
     }
-    let cardHtml = `
-      <div class="recipe-card" id=${recipeInfo.id}>
-        <h3 maxlength="40">${shortRecipeName}</h3>
-        <div class="card-photo-container">
-          <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
-          <div class="text">
-            <div>Click for Instructions</div>
-          </div>
-        </div>
-        <h4>${recipeInfo.tags[0]}</h4>
-        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-      </div>`
-    main.insertAdjacentHTML("beforeend", cardHtml);
+    addToDom(recipeInfo, shortRecipeName)
   });
 }
 
+function addToDom(recipeInfo, shortRecipeName) {
+  let cardHtml = `
+    <div class="recipe-card" id=${recipeInfo.id}>
+      <h3 maxlength="40">${shortRecipeName}</h3>
+      <div class="card-photo-container">
+        <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
+        <div class="text">
+          <div>Click for Instructions</div>
+        </div>
+      </div>
+      <h4>${recipeInfo.tags[0]}</h4>
+      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+    </div>`
+  main.insertAdjacentHTML("beforeend", cardHtml);
+}
+
+//Filter by recipe tags
 function findTags() {
   let tags = [];
   recipeData.forEach(recipe => {
@@ -65,7 +85,7 @@ function findTags() {
 function listTags(allTags) {
   allTags.forEach(tag => {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-                  <label for="${tag}">${capitalize(tag)}</label></li>`;
+      <label for="${tag}">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML('beforeend', tagHtml);
   });
 }
@@ -113,18 +133,7 @@ function hideUnselectedRecipes(filtered) {
   });
 }
 
-function generateUser() {
-  user = new User(users[Math.floor(Math.random() * users.length)]);
-  let firstName = user.name.split(' ')[0];
-  let welcomeMsg = `
-    <div class="welcome-msg">
-      <h1>Welcome ${firstName}!</h1>
-    </div>`;
-  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
-    welcomeMsg);
-  findPantryInfo();
-}
-
+// Favorite recipe functionality
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon") {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
@@ -154,6 +163,18 @@ function isDescendant(parent, child) {
   return false;
 }
 
+function showSavedRecipes() {
+  let unsavedRecipes = recipes.filter(recipe => {
+    return !user.favoriteRecipes.includes(recipe.id);
+  });
+  unsavedRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+  showMyRecipesBanner();
+}
+
+// Create and display recipe instructions
 function openRecipeInfo(event) {
   fullRecipeInfo.style.display = 'inline';
   let recipeId = event.path.find(e => e.id).id;
@@ -189,9 +210,7 @@ function generateInstructions(recipe) {
     return i.instruction
   });
   instructions.forEach(i => {
-    instructionsList += `
-      <li>${i}</li>
-      `
+    instructionsList += `<li>${i}</li>`
   });
   fullRecipeInfo.insertAdjacentHTML("beforeend", '<h4>Instructions</h4>');
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
@@ -204,20 +223,31 @@ function exitRecipe() {
   document.getElementById('overlay').remove();
 }
 
-function showSavedRecipes() {
-  let unsavedRecipes = recipes.filter(recipe => {
-    return !user.favoriteRecipes.includes(recipe.id);
+function searchRecipes() {
+  let searchedRecipes = recipeData.filter(recipe => {
+    return recipe.name.includes(searchInput.value);
   });
-  unsavedRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
-  showMyRecipesBanner();
 }
 
+// Toggle displays
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
   document.querySelector(".my-recipes-banner").style.display = "block";
+}
+
+function showWelcomeBanner() {
+  document.querySelector(".welcome-msg").style.display = "flex";
+  document.querySelector(".my-recipes-banner").style.display = "none";
+}
+
+function toggleMenu() {
+  var menuDropdown = document.querySelector(".drop-menu");
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    menuDropdown.style.display = "block";
+  } else {
+    menuDropdown.style.display = "none";
+  }
 }
 
 function showAllRecipes() {
@@ -228,17 +258,7 @@ function showAllRecipes() {
   showWelcomeBanner();
 }
 
-function showWelcomeBanner() {
-  document.querySelector(".welcome-msg").style.display = "flex";
-  document.querySelector(".my-recipes-banner").style.display = "none";
-}
-
-function searchRecipes() {
-  let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.includes(searchInput.value);
-  });
-}
-
+// Create and use pantry
 function findPantryInfo() {
   user.pantry.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
@@ -265,16 +285,6 @@ function displayPantryInfo(pantry) {
     document.querySelector(".pantry-list").insertAdjacentHTML('beforeend',
       ingredientHtml);
   });
-}
-
-function toggleMenu() {
-  var menuDropdown = document.querySelector(".drop-menu");
-  menuOpen = !menuOpen;
-  if (menuOpen) {
-    menuDropdown.style.display = "block";
-  } else {
-    menuDropdown.style.display = "none";
-  }
 }
 
 function findCheckedPantryBoxes() {
