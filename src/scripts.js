@@ -8,6 +8,7 @@ let pantryInfo = [];
 let recipes = [];
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
+let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
@@ -23,8 +24,8 @@ main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes)
-
+showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
+searchForm.addEventListener("submit", pressEnterSearch);
 
 // GENERATE A USER ON LOAD
 function generateUser() {
@@ -235,6 +236,12 @@ function showMyRecipesBanner() {
 function showWelcomeBanner() {
   document.querySelector(".welcome-msg").style.display = "flex";
   document.querySelector(".my-recipes-banner").style.display = "none";
+}
+
+// SEARCH RECIPES
+function pressEnterSearch(event) {
+  event.preventDefault();
+  searchRecipes();
 }
 
 function searchRecipes() {
